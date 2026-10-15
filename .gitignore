@@ -1,3 +1,4 @@
 
 # Regenerable: render/render.sh writes it with SAVE_BLEND=1
-render/case-pcb.blend
+render/*.blend
+__pycache__/

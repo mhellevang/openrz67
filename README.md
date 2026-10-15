@@ -13,6 +13,11 @@ the page background shows through.
     cd render && ./render.sh              # inputs + render
     ./render.sh --no-inputs               # render only
     SAVE_BLEND=1 ./render.sh              # also write render/case-pcb.blend
+    ./render.sh nrf [--no-inputs]         # img/nrf-case-pcb.png, the coin-cell board
+
+The nRF render (`render/render_nrf.py`) reuses the look and camera from
+`render_case.py`; its lifts and board placement are constants at its top, in sync
+with `nrf52/case/openrz67_nrf_case.py`.
 
 Camera and look are environment overrides (`CAM_AZ`, `CAM_EL`, `CAM_LENS`,
 `CAM_MARGIN`, `RENDER_RES`, `RENDER_SAMPLES`, `RENDER_EXPOSURE`). The exploded lifts

@@ -217,7 +217,12 @@ def main():
     move(roots, dz=LIFT_PCB)
     bpy.context.view_layer.update()   # matrix_world is stale until this runs
 
-    everything = base + lid + pipe + text + pcb
+    shoot(base + lid + pipe + text + pcb, OUT, HERE / "case-pcb.blend")
+
+
+def shoot(everything, out, blend):
+    """Backdrop, camera, lights and Cycles around an already placed scene."""
+    scene = bpy.context.scene
     lo, hi = bbox(everything)
     centre = (lo + hi) / 2.0
     radius = max((hi - lo).x, (hi - lo).y, (hi - lo).z) / 2.0
@@ -309,16 +314,16 @@ def main():
     scene.view_settings.look = "None"
     scene.view_settings.exposure = float(os.environ.get("RENDER_EXPOSURE", -0.35))
 
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    scene.render.filepath = str(OUT)
-    log(f"rendering {RES}x{RES} @ {SAMPLES} samples -> {OUT}")
+    out.parent.mkdir(parents=True, exist_ok=True)
+    scene.render.filepath = str(out)
+    log(f"rendering {RES}x{RES} @ {SAMPLES} samples -> {out}")
     bpy.ops.render.render(write_still=True)
     log("done")
 
     if os.environ.get("SAVE_BLEND"):
-        blend = HERE / "case-pcb.blend"
         bpy.ops.wm.save_as_mainfile(filepath=str(blend))
         log(f"saved {blend}")
 
 
-main()
+if __name__ == "__main__":
+    main()
