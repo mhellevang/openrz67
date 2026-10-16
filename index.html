@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>openrz67: open hardware for the Mamiya RZ67</title>
-<meta name="description" content="Open-source Bluetooth remote release and companion apps for the Mamiya RZ67 medium-format camera.">
+<title>openrz67: a coin-cell remote release for the Mamiya RZ67</title>
+<meta name="description" content="Open-source coin-cell Bluetooth remote release and companion apps for the Mamiya RZ67 medium-format camera.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%231b1b1b'/><circle cx='16' cy='16' r='7' fill='%23c8402d'/></svg>">
 <style>
 :root{--bg:#f4efe6;--bg2:#eae3d6;--ink:#1b1b1b;--mute:#5f5a52;--line:#d6cdbd;--acc:#c8402d;--acc2:#a3321f;--r:10px;--s:clamp(1rem,3vw,2rem);--w:1080px;--t:.2s ease;--sh:0 1px 2px #0002,0 8px 24px #0000000d;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
@@ -25,6 +25,7 @@ p{max-width:62ch}
 section{padding-block:clamp(3.5rem,8vw,6rem)}
 section+section{border-top:1px solid var(--line)}
 .lead{color:var(--mute);font-size:1.1em;max-width:58ch}
+.lead+.lead{margin-top:1rem}
 .eyebrow{display:inline-block;font:600 .75rem/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);margin-bottom:1rem}
 
 header{position:sticky;top:0;z-index:9;background:#f4efe6e6;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
@@ -49,7 +50,6 @@ nav a:not(.logo):hover{color:var(--ink)}
 .btn:not(.p):hover{background:var(--ink);color:var(--bg)}
 .pcb{display:block;border-radius:var(--r);overflow:hidden;box-shadow:var(--sh);background:var(--bg2)}
 .hardware{display:grid;gap:1.5rem}
-.pcb-top{background:linear-gradient(145deg,#a5a49f,#cecdca);padding:.75rem}
 figcaption{font-size:.85rem;color:var(--mute);margin-top:.75rem;text-align:center}
 
 .cards{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));margin-top:2rem}
@@ -107,19 +107,20 @@ footer a:hover{text-decoration:underline}
 <main>
 <section class="hero wrap" aria-labelledby="h">
 <div>
-<span class="badge">Working prototype · open source · MIT</span>
-<h1 id="h">A Bluetooth remote release for the <em>Mamiya RZ67</em>.</h1>
-<p class="lead">A tiny Bluetooth trigger that plugs into the RZ67's electrical remote port, and a phone app to fire it, for Android and iPhone. Instant shutter, bulb exposures and self-timer countdowns. Rev 2 is in regular use and shooting film.</p>
-<div class="cta"><a class="btn p" href="#start">Get started</a><a class="btn" href="https://github.com/openrz67">View on GitHub</a></div>
+<span class="badge">Rev A in testing · open source · MIT</span>
+<h1 id="h">A coin-cell remote release for the <em>Mamiya RZ67</em>.</h1>
+<p class="lead">A 37 mm box that plugs into the RZ67's electrical remote port and runs on a CR2032. Fire it from your phone over Bluetooth, on Android or iPhone: instant shutter, bulb exposures and self-timer countdowns. Between sessions it sleeps, and a press on its button wakes it.</p>
+<p class="lead">Rev A is in testing. The earlier <a href="#other">ESP32 board</a> runs the same apps and is shooting film today.</p>
+<div class="cta"><a class="btn p" href="#start">Get started</a><a class="btn" href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">View on GitHub</a></div>
 </div>
 <div class="hardware">
 <figure>
-<a class="pcb" href="img/case-pcb.png"><img src="img/case-pcb.png?v=rev3" width="1400" height="1400" fetchpriority="high" alt="Exploded CAD view of the OpenRZ67 trigger: white lid with black inlaid lettering and a light pipe above the rev 3 PCB, with the enclosure base below"></a>
-<figcaption>Case + rev 3 PCB · CAD render<br>Battery, switch and wiring omitted.</figcaption>
+<a class="pcb" href="img/nrf-case-pcb.png"><img src="img/nrf-case-pcb.png" width="1400" height="1400" fetchpriority="high" alt="Exploded CAD view of the coin-cell trigger: white lid with OpenRZ67 Trigger lettering and a light pipe, the rev A board, a CR2032 under it and the sliding floor"></a>
+<figcaption>Case + rev A board · CAD render<br>37 × 38 × 12 mm, the cell slides out the back.</figcaption>
 </figure>
 <figure>
-<a class="pcb pcb-top" href="img/pcb-top.png"><img src="img/pcb-top.png?v=rev2" width="1400" height="700" alt="Top view of the rev 2 trigger PCB, showing the ESP32-C3, two PhotoMOS relays, USB-C port and camera connector"></a>
-<figcaption>Rev 2 PCB · top view</figcaption>
+<a class="pcb" href="img/nrf-pcb-top.png"><img src="img/nrf-pcb-top.png" width="1376" height="1376" alt="Top view of the 29.5 by 29 mm rev A board: nRF54L15 module, two PhotoMOS relays, SWD and camera connectors, button and LED"></a>
+<figcaption>Rev A board · 29.5 × 29 mm · KiCad render</figcaption>
 </figure>
 </div>
 </section>
@@ -130,14 +131,14 @@ footer a:hover{text-decoration:underline}
 <p class="lead">Each piece lives in its own repository with its own build instructions, releases and issue tracker.</p>
 <div class="cards">
 <article class="card">
-<div class="top"><h3>openrz67-trigger</h3><span class="status ok">rev 2 in regular use</span></div>
-<p>ESP32-C3 firmware and a custom PCB. Two isolated PhotoMOS channels close the camera's S1/S2 contacts. Runs off a 250 mAh LiPo at an 80 MHz clock and 0 dBm BLE for long standby.</p>
+<div class="top"><h3>openrz67-trigger</h3><span class="status wip">rev A in testing</span></div>
+<p>An nRF54L15 module on a CR2032, with no charger, regulator or power switch. Two isolated PhotoMOS channels close the camera's S1/S2 contacts. Zephyr firmware, updates over Bluetooth.</p>
 <ul>
 <li>Instant release, bulb mode, configurable countdown</li>
-<li>KiCad project, Gerbers, BOM and pick-and-place files</li>
-<li>3D-printable enclosure, print-tested and in regular use</li>
+<li>Comes assembled from JLCPCB, nothing to solder</li>
+<li>3D-printable case with a sliding floor for the cell</li>
 </ul>
-<div class="links"><a href="https://github.com/openrz67/openrz67-trigger">Repository</a><a href="https://github.com/openrz67/openrz67-trigger/blob/main/esp32/pcb/kicad/out/openrz67-schematic.pdf">Schematic (PDF)</a><a href="https://github.com/openrz67/openrz67-trigger/blob/main/esp32/BOM.md">BOM</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/pcb/archive/2026-09-07-rev2">Rev 2 fab files</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/pcb/kicad">KiCad source (rev 3)</a><a href="https://github.com/openrz67/openrz67-trigger#ble-protocol">BLE protocol</a><a href="https://github.com/openrz67/openrz67-trigger/issues">Issues</a></div>
+<div class="links"><a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">Repository</a><a href="https://github.com/openrz67/openrz67-trigger/blob/main/nrf/kicad/out/openrz67-nrf-schematic.pdf">Schematic (PDF)</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/kicad/out">Fab files</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/firmware">Firmware</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/case">Case</a><a href="https://github.com/openrz67/openrz67-trigger#ble-protocol">BLE protocol</a><a href="https://github.com/openrz67/openrz67-trigger/issues">Issues</a></div>
 </article>
 <article class="card">
 <div class="top"><h3>openrz67-android</h3><span class="status ok" id="av">v1.1 released</span></div>
@@ -165,31 +166,39 @@ footer a:hover{text-decoration:underline}
 <section id="how"><div class="wrap">
 <span class="eyebrow">How it works</span>
 <h2>Two contacts, shorted to ground</h2>
-<p class="lead">The RZ67's remote port exposes two contacts, S1 and S2. Shorting them to camera ground fires the shutter. The trigger does exactly that with optically isolated PhotoMOS relays, so the ESP32 never shares a ground with the camera.</p>
+<p class="lead">The RZ67's remote port exposes two contacts, S1 and S2. Shorting them to camera ground fires the shutter. The trigger does exactly that with optically isolated PhotoMOS relays, so the cell never shares a ground with the camera.</p>
 <div class="split">
 <div>
 <h3>Camera remote port</h3>
 <p>Four pins, viewed from the front of the camera.</p>
 <table><thead><tr><th>Pin</th><th>Signal</th></tr></thead><tbody>
-<tr><td>1</td><td>6 V, unused by the board</td></tr>
+<tr><td>1</td><td>6 V, not connected</td></tr>
 <tr><td>2</td><td>GND</td></tr>
 <tr><td>3</td><td>S1 switch</td></tr>
 <tr><td>4</td><td>S2 switch</td></tr>
 </tbody></table>
+<h3 style="margin-top:2rem">Button and power</h3>
+<p>No power switch. The chip sleeps until the button wakes it.</p>
+<table><thead><tr><th>State</th><th>What happens</th></tr></thead><tbody>
+<tr><td>Asleep</td><td>About 0.7 µA by spec. A press wakes it.</td></tr>
+<tr><td>Awake</td><td>Advertises as <code>OpenRZ67</code> for 5 minutes, then sleeps if no phone connects.</td></tr>
+<tr><td>Connected</td><td>Stays on while the app holds the link. After a disconnect, 5 more minutes to reconnect.</td></tr>
+<tr><td>Hold 3 s</td><td>Off, until the next press.</td></tr>
+</tbody></table>
 <h3 style="margin-top:2rem">BLE commands</h3>
-<p>The trigger advertises as <code>OpenRZ67</code>. Commands are single bytes written without response. Value = button × 10 + state.</p>
+<p>Commands are single bytes written without response. Value = button × 10 + state.</p>
 <table><thead><tr><th>Byte</th><th>Action</th></tr></thead><tbody>
 <tr><td>11</td><td>Fire shutter, 100 ms pulse</td></tr>
 <tr><td>21 / 20</td><td>Start / end bulb</td></tr>
 <tr><td>31 / 30</td><td>Start / cancel 10 s countdown</td></tr>
 <tr><td>3 n 1</td><td>Countdown of <em>n</em> seconds</td></tr>
-<tr><td colspan="2">Every board exposes the standard Device Information Service (firmware revision). Rev 3 boards add a read/notify characteristic with the system voltage in millivolts, plus the standard Battery Service (0x180F) with the level in percent.</td></tr>
+<tr><td colspan="2">The board also exposes the standard Device Information Service (firmware revision), a read/notify characteristic with the cell voltage in millivolts, and the standard Battery Service (0x180F) with the level in percent.</td></tr>
 </tbody></table>
 <div class="warn">For bulb exposures set the shutter dial to <strong>B</strong>. The camera closes the shutter on its own after about 60 seconds regardless.</div>
 </div>
 <figure class="wiring">
-<img src="img/wiring.svg?v=pin1" alt="Wiring diagram: ESP32-C3 GPIO 3 and 4 drive two TLP172AM PhotoMOS relays through 220 ohm resistors; their isolated outputs connect S1 and S2 to camera ground">
-<figcaption>How the two isolated channels reach the camera. On the PCB this is already routed.</figcaption>
+<img src="img/wiring-nrf.svg" alt="Wiring diagram: nRF54L15 pins P2.05 and P2.04 drive two TLP172AM PhotoMOS relays through 220 ohm resistors; their isolated outputs connect S2 and S1 to camera ground">
+<figcaption>How the two isolated channels reach the camera. On the board this is already routed.</figcaption>
 </figure>
 </div>
 </div></section>
@@ -209,23 +218,39 @@ footer a:hover{text-decoration:underline}
 <section id="start"><div class="wrap">
 <span class="eyebrow">Get started</span>
 <h2>Build one.</h2>
-<p class="lead">A hobby project, so there is nothing to buy: you build one yourself, with the board made by JLCPCB. Read the trigger README before ordering.</p>
+<p class="lead">A hobby project, so there is nothing to buy: the board comes assembled from JLCPCB and everything else plugs in. Rev A is still in testing, so read the <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">nrf README</a> before ordering.</p>
 <ol class="steps">
-<li><h3>Get a board</h3><p>Order the verified rev 2 from its <a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/pcb/archive/2026-09-07-rev2">fab package</a>: Gerbers, BOM and pick-and-place exactly as ordered, KiCad source at tag <a href="https://github.com/openrz67/openrz67-trigger/tree/pcb-rev2/pcb/kicad">pcb-rev2</a>. Rev 3 is in <a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/pcb/kicad/out">esp32/pcb/kicad/out</a>, still a work in progress.</p></li>
-<li><h3>Flash the firmware</h3><p>Clone the trigger repo and run <code>pio run -t upload</code> in <code>esp32/</code> with PlatformIO. That flashes rev 2; for rev 3 use <code>pio run -e rev3 -t upload</code>. Hold BOOT while resetting if upload doesn't start.</p></li>
-<li><h3>Make the cable</h3><p>Four-pin JST XH at the board end; at the camera end, four 2.54 mm Dupont sleeves pushed onto the pins and taped. Wire all four pins straight through; pin 1 (6 V) ends on a pad the board leaves unconnected. Double-check orientation before you plug it in. The cell, switch, antenna and connectors are listed in <a href="https://github.com/openrz67/openrz67-trigger/blob/main/esp32/BOM.md">BOM.md</a>.</p></li>
-<li><h3>Print the case</h3><p>Get the enclosure files and printing instructions from <a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/case">esp32/case/</a> in the trigger repo. Fits rev 2 and rev 3, with the battery under the PCB. Read the case README before printing.</p></li>
-<li><h3>Install the app</h3><p>Grab the APK from <a href="https://github.com/openrz67/openrz67-android/releases/latest">releases</a>. Power on the trigger and the app connects on its own. On iPhone, build <a href="https://github.com/openrz67/openrz67-ios">openrz67-ios</a> in Xcode until it is in the App Store.</p></li>
+<li><h3>Get a board</h3><p>Upload the Gerber zip, BOM and position file from <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/kicad/out">nrf/kicad/out</a> to JLCPCB, with assembly on both sides.</p></li>
+<li><h3>Flash the firmware</h3><p>Build it with the nRF Connect SDK, then flash once over the SWD connector with a Raspberry Pi Pico 2 running Raspberry Pi's debugprobe firmware, cell out. After that, updates go over Bluetooth. Steps in <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/firmware">nrf/firmware</a>.</p></li>
+<li><h3>Make the cable</h3><p>A Qwiic / STEMMA QT pigtail with female Dupont ends, pushed onto the camera pins and taped: black on pin 2 (GND), blue on pin 3 (S1), yellow on pin 4 (S2). The red wire is not connected on the board. Double-check orientation before you plug it in.</p></li>
+<li><h3>Print the case</h3><p>Get the files from <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/case">nrf/case</a>: shell and sliding floor in ABS, no supports, and a light pipe in clear filament. The CR2032 goes in + side up.</p></li>
+<li><h3>Install the app</h3><p>Grab the APK from <a href="https://github.com/openrz67/openrz67-android/releases/latest">releases</a>. Press the button and the app connects on its own. On iPhone, build <a href="https://github.com/openrz67/openrz67-ios">openrz67-ios</a> in Xcode until it is in the App Store.</p></li>
 </ol>
+</div></section>
+
+<section id="other"><div class="wrap">
+<span class="eyebrow">Other builds</span>
+<h2>Same apps, other hardware</h2>
+<p class="lead">Both speak the same Bluetooth protocol, so the apps work with either one unchanged.</p>
+<div class="cards">
+<article class="card">
+<div class="top"><h3>ESP32 board</h3><span class="status ok">rev 2 in regular use</span></div>
+<p>The first trigger: an ESP32-C3 on a 250 mAh LiPo with USB-C charging, PlatformIO firmware and its own printed case. Larger than the coin-cell board, but tested and shooting film.</p>
+<div class="links"><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32">README</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/pcb/archive/2026-09-07-rev2">Rev 2 fab files</a><a href="https://github.com/openrz67/openrz67-trigger/blob/main/esp32/BOM.md">BOM</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/case">Case</a></div>
+</article>
+<article class="card plan">
+<div class="top"><h3>Perfboard</h3><span class="status plan">sketch, not built</span></div>
+<p>The coin-cell circuit with off-the-shelf parts and through-hole soldering: a Seeed XIAO nRF54L15, two DIP PhotoMOS relays and a small LiPo. Same firmware, flashed over the XIAO's USB-C.</p>
+<div class="links"><a href="https://github.com/openrz67/openrz67-trigger/blob/main/nrf/notes/perfboard.md">Notes and wiring</a></div>
+</article>
+</div>
 </div></section>
 
 <section id="roadmap"><div class="wrap">
 <h2>Roadmap</h2>
 <ul class="road">
-<li><span class="status ok">done</span><div><strong>Rev 2 in regular use</strong><p>PhotoMOS relays instead of mechanical, side-entry camera connector, BQ25185 charger and TPS63031 buck-boost. Tested on USB and battery, September 2026.</p></div></li>
-<li><span class="status wip">in progress</span><div><strong>Rev 3</strong><p>Safer battery handling, battery level reporting and general board refinements.</p></div></li>
-<li><span class="status wip">in progress</span><div><strong>Coin-cell board</strong><p>An nRF54L15 module on a CR2032, with no charger or regulator. Rev A is ordered, not yet tested. Design, firmware and case in <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">nrf/</a>.</p></div></li>
-<li><span class="status ok">done</span><div><strong>Print-tested enclosure</strong><p>Stacked snap-fit case with the cell under the PCB. In regular use, with minor refinements ongoing.</p></div></li>
+<li><span class="status ok">done</span><div><strong>ESP32 board in regular use</strong><p>Rev 2 with PhotoMOS relays, LiPo and USB-C, shooting film since September 2026.</p></div></li>
+<li><span class="status wip">in progress</span><div><strong>Coin-cell board, rev A</strong><p>Testing in progress: board, firmware and case.</p></div></li>
 <li><span class="status wip">in progress</span><div><strong>App Store release</strong><p>The iOS app works against the trigger. Next: an Apple developer account and review.</p></div></li>
 <li><span class="status plan">ideas</span><div><strong>More of the RZ67 system</strong><p>Other parts of the RZ67 system may follow.</p></div></li>
 </ul>

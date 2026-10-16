@@ -26,10 +26,10 @@ if [ "${1:-}" != "--no-inputs" ] && [ "$VARIANT" = nrf ]; then
 
   # Not export.sh: that also rewrites the tracked slicer project.
   echo "==> case STLs"
-  ( cd "$TRIGGER_REPO/nrf52/case" && OUTDIR=stl uv run openrz67_nrf_case.py )
+  ( cd "$TRIGGER_REPO/nrf/case" && OUTDIR=stl uv run openrz67_nrf_case.py )
 
   echo "==> board GLB"
-  ( cd "$TRIGGER_REPO/nrf52/kicad" && "$KICAD_CLI" pcb export glb \
+  ( cd "$TRIGGER_REPO/nrf/kicad" && "$KICAD_CLI" pcb export glb \
       --subst-models --no-dnp \
       --include-silkscreen --include-soldermask --include-tracks --include-pads \
       --user-origin 0x0mm -f -o out/openrz67-nrf.glb openrz67-nrf.kicad_pcb )
@@ -37,12 +37,12 @@ elif [ "${1:-}" != "--no-inputs" ]; then
   [ -x "$KICAD_CLI" ] || { echo "kicad-cli not found (set KICAD_CLI)" >&2; exit 1; }
 
   echo "==> case STLs"
-  ( cd "$TRIGGER_REPO/case" && MAKE_3MF=false ./export.sh )
+  ( cd "$TRIGGER_REPO/esp32/case" && MAKE_3MF=false ./export.sh )
 
   # --user-origin puts the GLB origin on the board's front-left corner, which is
   # what render_case.py places at PCB_ORIGIN. Keep it matched to Edge.Cuts.
   echo "==> board GLB"
-  ( cd "$TRIGGER_REPO/pcb/kicad" && "$KICAD_CLI" pcb export glb \
+  ( cd "$TRIGGER_REPO/esp32/pcb/kicad" && "$KICAD_CLI" pcb export glb \
       --subst-models --no-dnp \
       --include-silkscreen --include-soldermask --include-tracks --include-pads \
       --user-origin 120x90mm -f -o out/openrz67.glb openrz67.kicad_pcb )

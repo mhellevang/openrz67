@@ -17,12 +17,12 @@ the page background shows through.
 
 The nRF render (`render/render_nrf.py`) reuses the look and camera from
 `render_case.py`; its lifts and board placement are constants at its top, in sync
-with `nrf52/case/openrz67_nrf_case.py`.
+with `nrf/case/openrz67_nrf_case.py`.
 
 Camera and look are environment overrides (`CAM_AZ`, `CAM_EL`, `CAM_LENS`,
 `CAM_MARGIN`, `RENDER_RES`, `RENDER_SAMPLES`, `RENDER_EXPOSURE`). The exploded lifts
 (lid +42 mm, PCB +16 mm) and the board's position in case coordinates are constants at
-the top of `render_case.py`; keep them in sync with `case/openrz67_case.py`.
+the top of `render_case.py`; keep them in sync with `esp32/case/openrz67_case.py`.
 
 The first version of this image was made by hand and went stale within a day — it still
 showed the SS12F15 slide switch after the KCD11 rocker had landed. That is what the

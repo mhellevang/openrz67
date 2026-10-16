@@ -45,8 +45,8 @@ from mathutils import Vector
 HERE = Path(__file__).resolve().parent
 SITE = HERE.parent
 TRIGGER = Path(os.environ.get("TRIGGER_REPO", SITE.parent / "openrz67-trigger"))
-STL = TRIGGER / "case" / "stl"
-GLB = TRIGGER / "pcb" / "kicad" / "out" / "openrz67.glb"
+STL = TRIGGER / "esp32" / "case" / "stl"
+GLB = TRIGGER / "esp32" / "pcb" / "kicad" / "out" / "openrz67.glb"
 OUT = Path(os.environ.get("RENDER_OUT", SITE / "img" / "case-pcb.png"))
 
 # --- layout ----------------------------------------------------------------
