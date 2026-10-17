@@ -101,17 +101,16 @@ footer a:hover{text-decoration:underline}
 <body>
 <header><nav class="wrap" aria-label="Main">
 <a class="logo" href="#"><i aria-hidden="true"></i>openrz67</a>
-<a href="#parts">Parts</a><a href="#how" class="hide-sm">How it works</a><a href="#start">Get started</a><a href="#roadmap" class="hide-sm">Roadmap</a><a href="https://github.com/openrz67">GitHub</a>
+<a href="#parts">Parts</a><a href="#how" class="hide-sm">How it works</a><a href="#start">Build one</a><a href="#roadmap" class="hide-sm">Roadmap</a><a href="https://github.com/openrz67">GitHub</a>
 </nav></header>
 
 <main>
 <section class="hero wrap" aria-labelledby="h">
 <div>
-<span class="badge">Rev A in testing · open source · MIT</span>
 <h1 id="h">A Bluetooth remote release for the <em>Mamiya RZ67</em>.</h1>
-<p class="lead">A 37 mm box that plugs into the RZ67's electrical remote port and runs on a CR2032. Fire it from your phone over Bluetooth, on Android or iPhone: instant shutter, bulb exposures and self-timer countdowns. Between sessions it sleeps, and a press on its button wakes it.</p>
-<p class="lead">Rev A is in testing. The earlier <a href="#other">ESP32 board</a> runs the same apps and is shooting film today.</p>
-<div class="cta"><a class="btn p" href="#start">Get started</a><a class="btn" href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">View on GitHub</a></div>
+<p class="lead">A 37 mm box on a CR2032 that plugs into the RZ67's electrical remote port. An Android or iPhone app fires the shutter over Bluetooth, holds it open for bulb, or runs a countdown. The board sleeps between uses and wakes on a button press.</p>
+<p class="lead">The project started in 2023 on a Seeed XIAO ESP32-C3 and a Fritzing schematic. A custom <a href="#other">ESP32-C3 board</a> on a LiPo followed in 2025 and went through two fabricated revisions. The coin-cell board is the third design; rev A is its first order, after several layout rounds.</p>
+<div class="cta"><a class="btn p" href="#start">Build one</a><a class="btn" href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">View on GitHub</a></div>
 </div>
 <div class="hardware">
 <figure>
@@ -126,9 +125,8 @@ footer a:hover{text-decoration:underline}
 </section>
 
 <section id="parts"><div class="wrap">
-<span class="eyebrow">The parts</span>
-<h2>The repositories</h2>
-<p class="lead">Each piece lives in its own repository with its own build instructions, releases and issue tracker.</p>
+<h2>Repositories</h2>
+<p class="lead">Board, Android app and iPhone app each have their own repository, releases and issue tracker.</p>
 <div class="cards">
 <article class="card">
 <div class="top"><h3>openrz67-trigger</h3><span class="status wip">rev A in testing</span></div>
@@ -142,7 +140,7 @@ footer a:hover{text-decoration:underline}
 </article>
 <article class="card">
 <div class="top"><h3>openrz67-android</h3><span class="status ok" id="av">v1.1 released</span></div>
-<p>Companion app for Android. Finds the trigger automatically, reconnects when the link drops, and puts the three shooting modes one tap away.</p>
+<p>Android app. Connects to the trigger on its own and reconnects when the link drops.</p>
 <ul>
 <li>Shutter, bulb and countdown with custom duration</li>
 <li>Auto-connect and reconnect over BLE</li>
@@ -152,7 +150,7 @@ footer a:hover{text-decoration:underline}
 </article>
 <article class="card">
 <div class="top"><h3>openrz67-ios</h3><span class="status ok">works, build from source</span></div>
-<p>Companion app for iPhone, written in SwiftUI. Same three modes as the Android app. Not in the App Store; build it from source in Xcode.</p>
+<p>iPhone app in SwiftUI, same modes as the Android app. Not in the App Store yet, so it has to be built in Xcode.</p>
 <ul>
 <li>Shutter, bulb and countdown with custom duration</li>
 <li>Auto-connect and reconnect over BLE</li>
@@ -164,9 +162,8 @@ footer a:hover{text-decoration:underline}
 </div></section>
 
 <section id="how"><div class="wrap">
-<span class="eyebrow">How it works</span>
-<h2>Two contacts, shorted to ground</h2>
-<p class="lead">The RZ67's remote port exposes two contacts, S1 and S2. Shorting them to camera ground fires the shutter. The trigger does exactly that with optically isolated PhotoMOS relays, so the cell never shares a ground with the camera.</p>
+<h2>How it works</h2>
+<p class="lead">The RZ67's remote port exposes two contacts, S1 and S2. Shorting them to camera ground fires the shutter. The trigger does that through two PhotoMOS relays, so the cell and the camera share no ground.</p>
 <div class="split">
 <div>
 <h3>Camera remote port</h3>
@@ -204,9 +201,8 @@ footer a:hover{text-decoration:underline}
 </div></section>
 
 <section id="app"><div class="wrap">
-<span class="eyebrow">The app</span>
-<h2>Direct, countdown and bulb</h2>
-<p class="lead">Switch modes at the top, fire with the big button. Follows your system light or dark theme.</p>
+<h2>The app</h2>
+<p class="lead">Mode selector at the top, one large release button. Light or dark theme follows the system setting.</p>
 <div class="shots">
 <figure><img src="img/app-direct.jpg?v=1.1" width="540" height="1188" alt="Android app: Direct mode with the shutter button"><figcaption>Direct</figcaption></figure>
 <figure><img src="img/app-countdown.jpg?v=1.1" width="540" height="1188" alt="Android app: Countdown running"><figcaption>Countdown</figcaption></figure>
@@ -216,9 +212,8 @@ footer a:hover{text-decoration:underline}
 </div></section>
 
 <section id="start"><div class="wrap">
-<span class="eyebrow">Get started</span>
-<h2>Build one.</h2>
-<p class="lead">A hobby project, so there is nothing to buy: the board comes assembled from JLCPCB and everything else plugs in. Rev A is still in testing, so read the <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">nrf README</a> before ordering.</p>
+<h2>Building one</h2>
+<p class="lead">Nothing is for sale. Order the board assembled from JLCPCB; the rest plugs in. Rev A has not been signed off yet, so read the <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf">nrf README</a> before ordering.</p>
 <ol class="steps">
 <li><h3>Get a board</h3><p>Upload the Gerber zip, BOM and position file from <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/kicad/out">nrf/kicad/out</a> to JLCPCB, with assembly on both sides.</p></li>
 <li><h3>Flash the firmware</h3><p>Build it with the nRF Connect SDK, then flash once over the SWD connector with a Raspberry Pi Pico 2 running Raspberry Pi's debugprobe firmware, cell out. After that, updates go over Bluetooth. Steps in <a href="https://github.com/openrz67/openrz67-trigger/tree/main/nrf/firmware">nrf/firmware</a>.</p></li>
@@ -229,13 +224,12 @@ footer a:hover{text-decoration:underline}
 </div></section>
 
 <section id="other"><div class="wrap">
-<span class="eyebrow">Other builds</span>
-<h2>Same apps, other hardware</h2>
-<p class="lead">Both speak the same Bluetooth protocol, so the apps work with either one unchanged.</p>
+<h2>Other hardware</h2>
+<p class="lead">Same Bluetooth protocol, so the apps work with any of these without changes.</p>
 <div class="cards">
 <article class="card">
 <div class="top"><h3>ESP32 board</h3><span class="status ok">rev 2 in regular use</span></div>
-<p>The first trigger: an ESP32-C3 on a 250 mAh LiPo with USB-C charging, PlatformIO firmware and its own printed case. Larger than the coin-cell board, but tested and shooting film.</p>
+<p>The previous design, from 2025: an ESP32-C3 on a 250 mAh LiPo with USB-C charging, PlatformIO firmware and its own printed case. Bigger than the coin-cell board. Rev 2 has been in use since September 2026.</p>
 <div class="links"><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32">README</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/pcb/archive/2026-09-07-rev2">Rev 2 fab files</a><a href="https://github.com/openrz67/openrz67-trigger/blob/main/esp32/BOM.md">BOM</a><a href="https://github.com/openrz67/openrz67-trigger/tree/main/esp32/case">Case</a></div>
 </article>
 <article class="card plan">
@@ -249,8 +243,9 @@ footer a:hover{text-decoration:underline}
 <section id="roadmap"><div class="wrap">
 <h2>Roadmap</h2>
 <ul class="road">
-<li><span class="status ok">done</span><div><strong>ESP32 board in regular use</strong><p>Rev 2 with PhotoMOS relays, LiPo and USB-C, shooting film since September 2026.</p></div></li>
-<li><span class="status wip">in progress</span><div><strong>Coin-cell board, rev A</strong><p>Testing in progress: board, firmware and case.</p></div></li>
+<li><span class="status ok">done</span><div><strong>XIAO ESP32-C3 prototype</strong><p>2023. Dev board, Fritzing schematic, first version of the BLE protocol and the Android app.</p></div></li>
+<li><span class="status ok">done</span><div><strong>ESP32 board in regular use</strong><p>Rev 2 with PhotoMOS relays, LiPo and USB-C, in use since September 2026.</p></div></li>
+<li><span class="status wip">in progress</span><div><strong>Coin-cell board, rev A</strong><p>Boards ordered 2026-10-10. Board, firmware and case under test.</p></div></li>
 <li><span class="status wip">in progress</span><div><strong>App Store release</strong><p>The iOS app works against the trigger. Next: an Apple developer account and review.</p></div></li>
 <li><span class="status plan">ideas</span><div><strong>More of the RZ67 system</strong><p>Other parts of the RZ67 system may follow.</p></div></li>
 </ul>
