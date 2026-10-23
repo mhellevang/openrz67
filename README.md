@@ -1,6 +1,6 @@
-# openrz67.github.io
+# openrz67
 
-Project site for [openrz67](https://github.com/openrz67), served by GitHub Pages from `main`.
+Project site for [openrz67](https://mhellevang.github.io/openrz67/), served by GitHub Pages from `main`.
 
 Plain HTML and CSS in `index.html`, plus `privacy.html` and `support.html` (the App Store/Play privacy policy and support URLs; each carries its own small copy of the styles). Images in `img/`. No build step.
 
