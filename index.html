@@ -109,7 +109,7 @@ footer a:hover{text-decoration:underline}
 <div>
 <h1 id="h">A Bluetooth remote release for the <em>Mamiya RZ67</em>.</h1>
 <p class="lead">A 37 mm box on a CR2032 that plugs into the RZ67's electrical remote port. An Android or iPhone app fires the shutter over Bluetooth, holds it open for bulb, or runs a countdown. The board sleeps between uses and wakes on a button press.</p>
-<p class="lead">The project started in 2023 on a Seeed XIAO ESP32-C3 and a Fritzing schematic. A custom <a href="#other">ESP32-C3 board</a> on a LiPo followed in 2025 and went through two fabricated revisions. The coin-cell board is the third design; rev A is its first order, after several layout rounds.</p>
+<p class="lead">The project started in 2023 on an ESP32-C3, first a dev board, then a custom board on a LiPo (<a href="https://github.com/mhellevang/openrz67-trigger/tree/esp32-final/esp32">archived</a>). The coin-cell board replaces it; rev A is its first order.</p>
 <div class="cta"><a class="btn p" href="#start">Build one</a><a class="btn" href="https://github.com/mhellevang/openrz67-trigger/tree/main/nrf">View on GitHub</a></div>
 </div>
 <div class="hardware">
@@ -225,13 +225,8 @@ footer a:hover{text-decoration:underline}
 
 <section id="other"><div class="wrap">
 <h2>Other hardware</h2>
-<p class="lead">Same Bluetooth protocol, so the apps work with any of these without changes.</p>
+<p class="lead">Same Bluetooth protocol, so the apps work with it without changes.</p>
 <div class="cards">
-<article class="card">
-<div class="top"><h3>ESP32 board</h3><span class="status ok">rev 2 in regular use</span></div>
-<p>The previous design, from 2025: an ESP32-C3 on a 250 mAh LiPo with USB-C charging, PlatformIO firmware and its own printed case. Bigger than the coin-cell board. Rev 1 was ordered in September 2025; rev 2 has been in use since September 2026.</p>
-<div class="links"><a href="https://github.com/mhellevang/openrz67-trigger/tree/main/esp32">README</a><a href="https://github.com/mhellevang/openrz67-trigger/tree/main/esp32/pcb/archive/2026-09-07-rev2">Rev 2 fab files</a><a href="https://github.com/mhellevang/openrz67-trigger/blob/main/esp32/BOM.md">BOM</a><a href="https://github.com/mhellevang/openrz67-trigger/tree/main/esp32/case">Case</a></div>
-</article>
 <article class="card plan">
 <div class="top"><h3>Perfboard</h3><span class="status plan">sketch, not built</span></div>
 <p>The coin-cell circuit with off-the-shelf parts and through-hole soldering: an Adafruit Feather nRF52840 on a FeatherWing Proto, two DIP PhotoMOS relays and a LiPo that plugs into the Feather. Same app, flashed by copying a file over USB.</p>
@@ -243,8 +238,7 @@ footer a:hover{text-decoration:underline}
 <section id="roadmap"><div class="wrap">
 <h2>Roadmap</h2>
 <ul class="road">
-<li><span class="status ok">done</span><div><strong>XIAO ESP32-C3 prototype</strong><p>2023. Dev board, Fritzing schematic, first version of the BLE protocol and the Android app.</p></div></li>
-<li><span class="status ok">done</span><div><strong>ESP32 board in regular use</strong><p>Rev 1 ordered September 2025, drawn in EasyEDA; it worked, but its LGS5500 charger led to a new power path. Rev 2 with PhotoMOS relays, BQ25185 charger and TPS63031 buck-boost, in use since September 2026.</p></div></li>
+<li><span class="status ok">done</span><div><strong>ESP32-C3 boards</strong><p>2023 to 2026. A dev board, then a custom board on a LiPo in two revisions. The BLE protocol and the Android app come from here. <a href="https://github.com/mhellevang/openrz67-trigger/tree/esp32-final/esp32">Archived</a>.</p></div></li>
 <li><span class="status wip">in progress</span><div><strong>Coin-cell board, rev A</strong><p>Boards ordered 2026-10-10. Board, firmware and case under test.</p></div></li>
 <li><span class="status wip">in progress</span><div><strong>App Store release</strong><p>The iOS app works against the trigger. Next: an Apple developer account and review.</p></div></li>
 <li><span class="status plan">ideas</span><div><strong>DIY kit</strong><p>Assembled board, with or without a printed case, once rev A has settled.</p></div></li>
