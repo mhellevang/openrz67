@@ -1,4 +1,5 @@
 
 # Regenerable: render/render.sh writes it with SAVE_BLEND=1
 render/*.blend
+render/*.blend1
 __pycache__/
