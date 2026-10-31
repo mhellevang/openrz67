@@ -45,8 +45,10 @@
   <text x="385" y="128" class="section">ISOLATED SHUTTER SWITCHES</text>
   <rect x="385" y="145" width="410" height="505" rx="18" class="photo"/>
 
-  <!-- channel S2 -->
   <rect x="410" y="190" width="360" height="180" rx="14" class="channel"/>
+  <rect x="410" y="390" width="360" height="180" rx="14" class="channel"/>
+
+  <!-- channel S2 -->
   <text x="430" y="220" class="label">U3 · TLP172AM · S2</text>
   <rect x="430" y="263" width="82" height="34" rx="7" fill="#fff7e8" stroke="#d88718" stroke-width="2"/>
   <text x="471" y="285" text-anchor="middle" class="small">R2 220 Ω</text>
@@ -55,18 +57,17 @@
   <rect x="535" y="258" width="58" height="44" rx="8" fill="#fff7e8" stroke="#d88718" stroke-width="2"/>
   <text x="564" y="285" text-anchor="middle" class="label">LED</text>
   <polyline points="593,280 606,280 606,590" class="gnd"/>
-  <line x1="598" y1="268" x2="657" y2="268" class="ray"/><polygon points="667,268 657,263 657,273" fill="#d88718"/>
-  <line x1="598" y1="292" x2="657" y2="292" class="ray"/><polygon points="667,292 657,287 657,297" fill="#d88718"/>
-  <line x1="630" y1="235" x2="630" y2="325" class="iso"/>
-  <rect x="680" y="257" width="68" height="46" rx="8" fill="#eef3ff" stroke="#456bd1" stroke-width="2"/>
-  <text x="714" y="276" text-anchor="middle" class="tiny">MOSFET</text>
-  <text x="714" y="292" text-anchor="middle" class="tiny">output</text>
-  <line x1="665" y1="280" x2="680" y2="280" class="out"/>
-  <line x1="748" y1="280" x2="867" y2="280" class="out"/>
-  <polyline points="665,280 650,280 650,560" class="out"/>
+  <line x1="614" y1="268" x2="650" y2="268" class="ray"/><polygon points="658,268 650,263 650,273" fill="#d88718"/>
+  <line x1="614" y1="292" x2="650" y2="292" class="ray"/><polygon points="658,292 650,287 650,297" fill="#d88718"/>
+  <line x1="632" y1="235" x2="632" y2="325" class="iso"/>
+  <rect x="685" y="257" width="68" height="46" rx="8" fill="#eef3ff" stroke="#456bd1" stroke-width="2"/>
+  <text x="719" y="276" text-anchor="middle" class="tiny">MOSFET</text>
+  <text x="719" y="292" text-anchor="middle" class="tiny">output</text>
+  <line x1="672" y1="280" x2="685" y2="280" class="out"/>
+  <line x1="753" y1="280" x2="867" y2="280" class="out"/>
+  <line x1="672" y1="280" x2="672" y2="560" class="out"/>
 
   <!-- channel S1 -->
-  <rect x="410" y="390" width="360" height="180" rx="14" class="channel"/>
   <text x="430" y="420" class="label">U2 · TLP172AM · S1</text>
   <rect x="430" y="443" width="82" height="34" rx="7" fill="#fff7e8" stroke="#d88718" stroke-width="2"/>
   <text x="471" y="465" text-anchor="middle" class="small">R1 220 Ω</text>
@@ -75,20 +76,20 @@
   <rect x="535" y="438" width="58" height="44" rx="8" fill="#fff7e8" stroke="#d88718" stroke-width="2"/>
   <text x="564" y="465" text-anchor="middle" class="label">LED</text>
   <line x1="593" y1="460" x2="606" y2="460" class="gnd"/>
-  <line x1="598" y1="448" x2="657" y2="448" class="ray"/><polygon points="667,448 657,443 657,453" fill="#d88718"/>
-  <line x1="598" y1="472" x2="657" y2="472" class="ray"/><polygon points="667,472 657,467 657,477" fill="#d88718"/>
-  <line x1="630" y1="415" x2="630" y2="505" class="iso"/>
-  <rect x="680" y="437" width="68" height="46" rx="8" fill="#eef3ff" stroke="#456bd1" stroke-width="2"/>
-  <text x="714" y="456" text-anchor="middle" class="tiny">MOSFET</text>
-  <text x="714" y="472" text-anchor="middle" class="tiny">output</text>
-  <line x1="665" y1="460" x2="680" y2="460" class="out"/>
-  <line x1="748" y1="460" x2="867" y2="460" class="out"/>
-  <line x1="665" y1="460" x2="650" y2="460" class="out"/>
-  <circle cx="650" cy="460" r="6" fill="#337f9c"/>
+  <circle cx="606" cy="460" r="6" fill="#27323a"/>
+  <line x1="614" y1="448" x2="650" y2="448" class="ray"/><polygon points="658,448 650,443 650,453" fill="#d88718"/>
+  <line x1="614" y1="472" x2="650" y2="472" class="ray"/><polygon points="658,472 650,467 650,477" fill="#d88718"/>
+  <line x1="632" y1="415" x2="632" y2="505" class="iso"/>
+  <rect x="685" y="437" width="68" height="46" rx="8" fill="#eef3ff" stroke="#456bd1" stroke-width="2"/>
+  <text x="719" y="456" text-anchor="middle" class="tiny">MOSFET</text>
+  <text x="719" y="472" text-anchor="middle" class="tiny">output</text>
+  <line x1="672" y1="460" x2="685" y2="460" class="out"/>
+  <line x1="753" y1="460" x2="867" y2="460" class="out"/>
+  <circle cx="672" cy="460" r="6" fill="#337f9c"/>
 
   <line x1="606" y1="590" x2="316" y2="590" class="gnd"/>
   <text x="600" y="613" text-anchor="end" class="tiny">cell GND</text>
-  <line x1="650" y1="560" x2="867" y2="560" class="out"/>
+  <line x1="672" y1="560" x2="867" y2="560" class="out"/>
 
   <text x="850" y="128" class="section">CAMERA PORT</text>
   <rect x="850" y="145" width="300" height="505" rx="18" class="camera"/>
