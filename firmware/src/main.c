@@ -18,6 +18,7 @@
 #include <zephyr/drivers/watchdog.h>
 #include <zephyr/drivers/timer/system_timer.h>
 #include <zephyr/sys/byteorder.h>
+#include <zephyr/sys/atomic.h>
 #include <zephyr/bluetooth/bluetooth.h>
 #include <zephyr/bluetooth/conn.h>
 #include <zephyr/bluetooth/gatt.h>
@@ -67,7 +68,27 @@ struct command {
 	uint8_t value;       /* 1 start, 0 stop */
 	uint32_t duration_ms;
 };
-K_MSGQ_DEFINE(commands, sizeof(struct command), 8, 4);
+K_MSGQ_DEFINE(commands, sizeof(struct command), 9, 4);
+static struct k_spinlock command_lock;
+
+static int enqueue_command(const struct command *c, bool disconnect)
+{
+	k_spinlock_key_t key = k_spin_lock(&command_lock);
+	if (disconnect) {
+		k_msgq_purge(&commands);
+	}
+	uint32_t free_slots = k_msgq_num_free_get(&commands);
+	bool stop = c->button == 2 && c->value == 0;
+	int err = 0;
+	/* Reserve the last slot for bulb stop. When full, the tail is already a stop. */
+	if (free_slots > 1 || (stop && free_slots == 1)) {
+		err = k_msgq_put(&commands, c, K_NO_WAIT);
+	} else if (!stop) {
+		err = -ENOSPC;
+	}
+	k_spin_unlock(&command_lock, key);
+	return err;
+}
 
 static uint16_t vbat_mv;
 static bool vbat_notify;
@@ -88,7 +109,9 @@ static ssize_t write_command(struct bt_conn *conn, const struct bt_gatt_attr *at
 	} else {
 		return BT_GATT_ERR(BT_ATT_ERR_VALUE_NOT_ALLOWED);
 	}
-	k_msgq_put(&commands, &c, K_NO_WAIT);
+	if (enqueue_command(&c, false)) {
+		return BT_GATT_ERR(BT_ATT_ERR_INSUFFICIENT_RESOURCES);
+	}
 	return len;
 }
 
@@ -126,7 +149,8 @@ static const struct bt_le_adv_param adv_param =
 	BT_LE_ADV_PARAM_INIT(BT_LE_ADV_OPT_CONN, 0x0030, 0x0060, NULL);
 
 static struct bt_conn *current_conn;
-static bool bulb_active, countdown_active;
+static bool bulb_active;
+static atomic_t countdown_active;
 static void adv_timeout_fn(struct k_work *work);
 static K_WORK_DELAYABLE_DEFINE(adv_timeout, adv_timeout_fn);
 
@@ -161,7 +185,7 @@ static void adv_timeout_fn(struct k_work *work)
 	if (current_conn) {
 		return;
 	}
-	if (countdown_active) {
+	if (atomic_get(&countdown_active)) {
 		/* the phone is gone but the picture is still owed: sleep after it fires */
 		k_work_reschedule(&adv_timeout, K_SECONDS(5));
 		return;
@@ -185,8 +209,7 @@ static void disconnected(struct bt_conn *conn, uint8_t reason)
 {
 	/* the app can no longer send the stop: end a bulb here so the outputs do not stay on */
 	struct command stop = {.button = 2, .value = 0};
-	k_msgq_purge(&commands);   /* drop queued starts, make room for the stop */
-	k_msgq_put(&commands, &stop, K_NO_WAIT);
+	enqueue_command(&stop, true);
 	if (current_conn) {
 		bt_conn_unref(current_conn);
 		current_conn = NULL;
@@ -271,7 +294,7 @@ static void handle(const struct command *c)
 	switch (c->button) {
 	case 1:
 		if (start) {
-			countdown_active = false;
+			atomic_clear(&countdown_active);
 			trigger_shutter();
 			led_hold_until = k_uptime_get() + LED_HOLD_MS;
 		} else {
@@ -280,7 +303,7 @@ static void handle(const struct command *c)
 		break;
 	case 2:
 		if (start) {
-			countdown_active = false;
+			atomic_clear(&countdown_active);
 			bulb_active = true;
 			open_shutter();
 		} else {
@@ -294,7 +317,7 @@ static void handle(const struct command *c)
 			close_shutter();
 			countdown_end = k_uptime_get() + c->duration_ms;
 		}
-		countdown_active = start;
+		atomic_set(&countdown_active, start);
 		break;
 	default:
 		LOG_WRN("unknown button %u", c->button);
@@ -312,7 +335,7 @@ static void led_tick(int64_t now)
 		on = true;
 	} else if (bulb_active) {
 		on = (now % 1000) < 100;
-	} else if (countdown_active) {
+	} else if (atomic_get(&countdown_active)) {
 		on = (now % 250) < 125;
 	} else if (current_conn == NULL) {
 		on = (now % 2000) < 40;
@@ -359,7 +382,7 @@ static void button_pressed(const struct device *dev, struct gpio_callback *cb, u
 /* How long the main loop may sleep before the LED or the countdown needs it */
 static k_timeout_t next_wait(int64_t now)
 {
-	if (countdown_active || bulb_active || now < led_hold_until) {
+	if (atomic_get(&countdown_active) || bulb_active || now < led_hold_until) {
 		return K_MSEC(20);
 	}
 	if (current_conn == NULL) {
@@ -418,9 +441,9 @@ int main(void)
 			handle(&c);
 		}
 		int64_t now = k_uptime_get();
-		if (countdown_active && now >= countdown_end) {
-			countdown_active = false;
+		if (atomic_get(&countdown_active) && now >= countdown_end) {
 			trigger_shutter();
+			atomic_clear(&countdown_active);
 			led_hold_until = k_uptime_get() + LED_HOLD_MS;
 		}
 		led_tick(now);

@@ -54,4 +54,6 @@ and:
 | `[3, _, 0]` | Cancel countdown |
 
 Starting a trigger or bulb exposure cancels any pending countdown. Commands are queued in
-the BLE callback and executed outside it, so the BLE stack never blocks on shutter timing.
+the BLE callback and executed outside it. One queue slot is reserved for bulb stop. When the
+queue is full, another bulb stop is covered by the queued stop. Other commands are dropped
+for writes without response or return an insufficient-resources error for writes with response.

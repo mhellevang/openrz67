@@ -75,7 +75,7 @@ overlay gives the firmware the ratio and a LiPo range (3.3 to 4.15 V) through `z
 ## Open
 
 - **Idle current.** The Feather's regulator and NeoPixel stay powered in System OFF, so sleep
-  current is far above the coin-cell board's 0.7 µA. Measure before promising battery life.
+  current is far above the 0.7 µA estimate for the coin-cell board. Measure before promising battery life.
   A switch from EN to GND turns the regulator off for a real off; USB still charges.
 - **Wake through the bootloader.** A press after System OFF resets the chip, and Adafruit's
   bootloader runs before the app. Check that it starts the app and does not stay in UF2 mode.

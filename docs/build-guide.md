@@ -75,6 +75,7 @@ Before the first cell, wipe the round pad on the back of the board with isopropy
 Flux left on it can keep the cell from making contact.
 
 Slide the CR2032 into the clip, **+ side toward the floor** (there is a + on the floor).
+Place the board in the shell with the switch under the button tab and J1 facing the cable opening.
 Slide the floor in until it clicks. To change the cell later, see
 [`case/README.md`](../case/README.md).
 
