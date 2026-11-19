@@ -73,11 +73,8 @@ NETS = {
 # connectors apart (their footprints carry the pin-1 dots).
 # (text, layer, x, y, height)
 SILK = [
-    (f"OpenRZ67 nRF rev {REV}", "B", 14.75, 0.85, 1.0),
-    ("CR2032  + SIDE OUT", "B", 14.75, 2.45, 1.0),
-    ("CERN-OHL-S-2.0", "B", 14.75, 4.05, 1.0),
-    ("github.com/mhellevang", "B", 14.75, 5.65, 1.0),
-    ("/openrz67-trigger", "B", 14.75, 7.25, 1.0),
+    ("CR2032  + SIDE OUT", "B", 14.75, 4.0, 1.2),
+    (f"OpenRZ67 nRF rev {REV}", "B", 14.75, 1.9, 1.0),
     ("CAM", "F", 23.6, 20.9, 1.0),
     ("SWD", "F", 12.3, 20.9, 1.0),
 ]
