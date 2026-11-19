@@ -14,7 +14,6 @@ runs a countdown.
   <img src="docs/img/app-direct.jpg" alt="App in direct mode" width="160">
   <img src="docs/img/app-countdown.jpg" alt="App in countdown mode" width="160">
   <img src="docs/img/app-bulb.jpg" alt="App in bulb mode" width="160">
-  <img src="docs/img/app-dark.jpg" alt="App with the dark theme" width="160">
 </p>
 
 ## What it does
