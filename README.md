@@ -86,9 +86,14 @@ Earlier ESP32-C3 versions are at tag
 
 ## License
 
-[MIT](LICENSE), covering the firmware, the KiCad design files and the enclosure sources. MIT
-is written for software, but its grant is broad enough to serve a hardware design;
-the closest hardware-specific equivalent is CERN-OHL-P.
+Copyright © 2023 Mathias Hellevang.
+
+- **Board, case and docs** (`kicad/`, `case/`, `docs/`):
+  [CERN-OHL-S-2.0](LICENSE).
+- **Firmware** (`firmware/`): [MPL-2.0](firmware/LICENSE).
+
+You may build, change and sell this. If you pass on a changed version, you must publish your
+changed files under the same licence. Source: <https://github.com/mhellevang/openrz67-trigger>.
 
 The footprints, symbols and 3D models in `kicad/openrz67-nrf.pretty/`,
 `openrz67-nrf.kicad_sym` and `openrz67-nrf.3dshapes/` are **not** covered, because they are
