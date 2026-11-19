@@ -100,5 +100,4 @@ Not affiliated with Mamiya.
 The camera connector pinout that made this project possible was described to me by
 Julio Ryuuzaki, who built and sold the Bluetooth [RZ Blue](https://ryuuzaki.jp/) trigger
 for years. He answered a cold email in December 2022 with the essentials: four pins, one
-ground, two live, one unconnected. He also warned that the camera closes the shutter by
-itself after about a minute in bulb mode. Thank you.
+ground, two live, one unconnected. Thank you.
