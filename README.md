@@ -4,6 +4,8 @@ A Bluetooth remote release for the Mamiya RZ67. A small box on a coin cell plugs
 camera's remote port. An Android or iPhone app fires the shutter, holds it open for bulb, or
 runs a countdown.
 
+<img src="docs/img/on-camera.jpg" alt="The trigger mounted on the side of a Mamiya RZ67 Pro II, cable running to the remote port" width="640">
+
 <img src="docs/img/case-photo.png" alt="The trigger opened up: board on the sliding floor, printed shell beside it" width="640">
 
 <img src="docs/img/case-pcb.png" alt="The trigger, exploded: sliding floor, coin cell, board and printed shell" width="480">
