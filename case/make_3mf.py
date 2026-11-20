@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 """
 Build a Bambu Studio / OrcaSlicer project .3mf by swapping fresh STL geometry
 into a hand-made template project, keeping ALL slicer settings intact:

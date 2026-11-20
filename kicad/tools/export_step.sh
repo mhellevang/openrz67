@@ -1,4 +1,5 @@
 #!/bin/sh
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 # Export the assembled board as STEP (out/openrz67-nrf.step, gitignored ~20 MB).
 # Needs the per-part .step models; fetches them if any are missing.
 #

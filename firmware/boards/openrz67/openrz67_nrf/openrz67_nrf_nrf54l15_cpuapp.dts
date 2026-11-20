@@ -1,3 +1,4 @@
+/* SPDX-License-Identifier: MPL-2.0 */
 /dts-v1/;
 #include <nordic/nrf54l15_cpuapp.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>

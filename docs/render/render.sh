@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 # Regenerate docs/img/case-pcb.png and case-photo.png from the current case and board geometry.
 #
 #   ./render.sh                  # STLs + board GLB + render

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 # /// script
 # requires-python = ">=3.12"
 # dependencies = ["build123d>=0.11.1"]

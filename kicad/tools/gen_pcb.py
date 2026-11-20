@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 """Build openrz67-nrf.kicad_pcb from design.py with KiCad's pcbnew.
 
 Run with KiCad's bundled python from kicad/:

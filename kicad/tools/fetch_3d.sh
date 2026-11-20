@@ -1,4 +1,5 @@
 #!/bin/sh
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 # Fetch STEP + WRL 3D models for every LCSC part in the BOM into openrz67-nrf.3dshapes/.
 #
 # WRL files are committed (small, used for rendering); STEP files are gitignored and

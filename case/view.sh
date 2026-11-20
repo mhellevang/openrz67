@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 # Board + case in CAD Viewer: exports the board STEP from KiCad, builds GLBs into view/ and
 # serves them. Prints the links; Ctrl-C stops the viewer.
 #

@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 """Single source of truth for the nRF54L15 trigger board: parts, placement, nets, routing.
 
 gen_pcb.py builds the board from it with pcbnew, gen_sch.py writes the schematic.

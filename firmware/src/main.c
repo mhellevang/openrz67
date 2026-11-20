@@ -1,8 +1,9 @@
+/* SPDX-License-Identifier: MPL-2.0 */
 /* OpenRZ67 trigger, nRF54L15 / coin cell. Zephyr (nRF Connect SDK).
  *
  * GATT interface, as the Android and iOS apps use it:
  *   service  c9239c9e-6fc9-4168-b3aa-53105eb990b0
- *   command  458d4dc9-349f-401d-b092-a2b1c55f5319  write-without-response
+ *   command  458d4dc9-349f-401d-b092-a2b1c55f5319  write, with or without response
  *            1 byte:  button * 10 + state        (1 trigger, 2 bulb, 3 countdown; 1 start, 0 stop)
  *            3 bytes: [3, seconds, state]        countdown with its duration
  *   battery  cda71ce6-4af9-4aa2-8d34-329c2acdae09  cell voltage, mV, uint16 LE, read + notify

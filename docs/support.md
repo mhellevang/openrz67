@@ -6,7 +6,7 @@ The apps control the openrz67 trigger, a Bluetooth remote release you build your
 Mamiya RZ67. They need the trigger to do anything. The [build guide](build-guide.md) shows how
 to build one.
 
-## The app stays on "Scanning for devices"
+## The app keeps searching for the trigger
 
 - Press the button on the trigger to wake it. A short blink every 2 seconds means it is
   waiting for a phone. It goes back to sleep after 3 minutes without one.
@@ -17,9 +17,11 @@ to build one.
 
 ## The connection dropped
 
-The app reconnects on its own when the trigger comes back in range. The status line says
-"Waiting for trigger" meanwhile. **Reconnect** makes the app forget the trigger and scan again,
-which helps if you switched to a different one.
+The app reconnects on its own when the trigger comes back in range. **Reconnect** tries again
+at once.
+
+If you switched to a different trigger: on iPhone, **Reconnect** forgets the old one and scans
+again. On Android, close the app and open it again.
 
 ## The shutter does not fire
 

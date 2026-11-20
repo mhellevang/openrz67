@@ -23,8 +23,9 @@ set the shutter-speed dial to `B`. The camera closes the shutter by itself after
 ## BLE protocol
 
 The device advertises as `OpenRZ67` with service UUID `c9239c9e-6fc9-4168-b3aa-53105eb990b0`
-and characteristic `458d4dc9-349f-401d-b092-a2b1c55f5319`. Send commands using Write Without
-Response. The characteristic is open (no pairing): anyone in radio range can fire the camera,
+and characteristic `458d4dc9-349f-401d-b092-a2b1c55f5319`. Write commands with or without response. With
+response, the write returns once the command is queued, and a rejected command returns an
+error. The characteristic is open (no pairing): anyone in radio range can fire the camera,
 which is accepted for a shutter release.
 
 Also exposed: the standard Device Information Service (`0x180A`, firmware revision `0x2A26`),
@@ -53,7 +54,13 @@ and:
 | `[3, n, 1]` | Start countdown of *n* seconds (`1–255`). `n = 0` is rejected |
 | `[3, _, 0]` | Cancel countdown |
 
-Starting a trigger or bulb exposure cancels any pending countdown. Commands are queued in
+Starting a trigger or bulb exposure cancels any pending countdown. Starting a countdown ends
+a bulb exposure.
+
+When the connection drops, a bulb exposure ends and a running countdown still fires. The
+device then advertises for 3 minutes and sleeps if nothing connects.
+
+Commands are queued in
 the BLE callback and executed outside it. One queue slot is reserved for bulb stop. When the
 queue is full, another bulb stop is covered by the queued stop. Other commands are dropped
 for writes without response or return an insufficient-resources error for writes with response.

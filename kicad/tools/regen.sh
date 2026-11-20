@@ -1,4 +1,5 @@
 #!/bin/sh
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 # Rebuild the schematic and board from tools/design.py, then everything under out/.
 #
 # Run after any change to tools/design.py (or the generators / libraries). Close KiCad

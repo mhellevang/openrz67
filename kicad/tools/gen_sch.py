@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 """Write openrz67-nrf.kicad_sch from design.py.
 
 A netlist-style schematic: symbols sit in functional groups, every connected pin gets a

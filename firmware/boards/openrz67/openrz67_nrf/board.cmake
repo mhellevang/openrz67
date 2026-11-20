@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MPL-2.0
 # Raspberry Pi Pico running debugprobe (CMSIS-DAP) through pyOCD, or a J-Link.
 #   west flash --runner pyocd
 #   west flash --runner jlink

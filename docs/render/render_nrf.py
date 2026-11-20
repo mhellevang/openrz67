@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 """Renders of the nRF54L15 coin-cell trigger from the current geometry.
 
     RENDER_SCENE=exploded   docs/img/case-pcb.png    floor, cell, PCB, shell

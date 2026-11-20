@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 # Export base + lid + light pipe to stl/ and rebuild the slicer project openrz67-nrf-case.3mf from
 # qidi-template.3mf (print profile and plate layout kept, meshes swapped by make_3mf.py).
 #

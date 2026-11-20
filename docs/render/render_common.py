@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: CERN-OHL-S-2.0
 """Blender helpers and the shared look (camera, lights, backdrop) for render_nrf.py."""
 
 import math

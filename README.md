@@ -18,7 +18,7 @@ runs a countdown.
 
 ## What it does
 
-- Instant release, bulb, and a countdown of 1 to 255 seconds.
+- Instant release, bulb, and a countdown of up to 4 minutes.
 - Runs on a CR2032. It sleeps between uses and wakes on a button press.
 - Nothing to solder. The board comes assembled from JLCPCB, everything else plugs in.
 - Firmware updates over Bluetooth.
@@ -34,7 +34,8 @@ In short:
 
 1. Order the assembled board from JLCPCB with the files in [`kicad/out/`](kicad/out/).
 2. Print the case from [`case/`](case/).
-3. Flash the firmware once with a Raspberry Pi Pico. After that, updates go over Bluetooth.
+3. Build the firmware with the nRF Connect SDK and flash it once with a Raspberry Pi Pico.
+   After that, updates go over Bluetooth.
 4. Make the camera cable from a Qwiic pigtail.
 5. Install the app.
 
@@ -85,8 +86,9 @@ Copyright © 2023 Mathias Hellevang.
   [CERN-OHL-S-2.0](LICENSE).
 - **Firmware** (`firmware/`): [MPL-2.0](firmware/LICENSE).
 
-You may build, change and sell this. If you pass on a changed version, you must publish your
-changed files under the same licence. Source: <https://github.com/mhellevang/openrz67-trigger>.
+You may build, change and sell this. If you pass it on, built or as files, tell the receiver
+where the source is. If you changed it, publish your changed files under the same licence.
+Source: <https://github.com/mhellevang/openrz67-trigger>.
 
 The footprints, symbols and 3D models in `kicad/openrz67-nrf.pretty/`,
 `openrz67-nrf.kicad_sym` and `openrz67-nrf.3dshapes/` are **not** covered, because they are
