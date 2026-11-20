@@ -12,7 +12,8 @@ SDK v3.4.1 (MCUboot 39 kB, app 147 kB flash, 45 kB RAM); runs on the Rev A board
 | `VERSION` | the firmware version: shown as the firmware revision in Device Information, and the MCUboot image version |
 | `sysbuild.conf`, `sysbuild/mcuboot.conf` | MCUboot as the bootloader, fed watchdog during a swap |
 | `debug.conf` | add-on: logging over Segger RTT |
-| `dfu.py` | update over Bluetooth from a computer |
+| `build.sh` | build MCUboot and the signed app |
+| `upload.py` | update over Bluetooth from a computer |
 | `boards/openrz67/openrz67_nrf/` | the board: pin map (devicetree), SoC, flash runners |
 | `boards/adafruit_feather_nrf52840_nrf52840_uf2.*` | the perfboard variant on an Adafruit Feather nRF52840 Express, see [`../docs/perfboard.md`](../docs/perfboard.md) |
 
@@ -80,8 +81,19 @@ warning), and anyone could sign an image the board accepts.
 
 ### Build
 
-The board lives in this directory, so pass it as `BOARD_ROOT`. Sysbuild builds MCUboot and the
-app and signs the app. `FW` is this directory, `KEY` the signing key:
+Sysbuild builds MCUboot and the app and signs the app. From this directory:
+
+```sh
+./build.sh          # add debug for RTT logging
+```
+
+It expects the SDK workspace in `~/ncs` and the key at `~/.openrz67/mcuboot-ed25519.pem`;
+set `NCS` and `KEY` if yours are elsewhere, for example
+`NCS=/path/to/ncs KEY=/path/to/key.pem ./build.sh`. It activates `$NCS/.venv` if there is
+one; the rest of the SDK environment (such as `ZEPHYR_SDK_INSTALL_DIR`) is used as it is.
+
+The same without the script (PowerShell, cmd), from the SDK workspace. The board lives in
+this directory, so pass it as `BOARD_ROOT`. `FW` is this directory, `KEY` the signing key:
 
 ```sh
 FW=/path/to/openrz67/firmware
@@ -123,7 +135,7 @@ From a computer instead (needs [uv](https://docs.astral.sh/uv/)), with the board
 phone app closed:
 
 ```sh
-uv run $FW/dfu.py   # default: $FW/build/firmware/zephyr/zephyr.signed.bin
+./upload.py   # default: build/firmware/zephyr/zephyr.signed.bin
 ```
 
 It uploads, marks the image for a test boot, resets, checks that the new image runs and then

@@ -6,7 +6,7 @@
 # ///
 """Update the board over Bluetooth from a computer: upload, test boot, confirm.
 
-    uv run firmware/dfu.py [firmware/build/firmware/zephyr/zephyr.signed.bin]
+    ./upload.py [build/firmware/zephyr/zephyr.signed.bin]
 """
 import asyncio
 import sys
