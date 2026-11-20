@@ -84,7 +84,7 @@ The board lives in this directory, so pass it as `BOARD_ROOT`. Sysbuild builds M
 app and signs the app. `FW` is this directory, `KEY` the signing key:
 
 ```sh
-FW=/path/to/openrz67-trigger/firmware
+FW=/path/to/openrz67/firmware
 KEY=/path/to/mcuboot-ed25519.pem
 west build -b openrz67_nrf/nrf54l15/cpuapp -s $FW -d $FW/build -- -DBOARD_ROOT=$FW -DSB_CONFIG_BOOT_SIGNATURE_KEY_FILE=\"$KEY\"
 ```

@@ -40,4 +40,4 @@ takes one exposure at the dialled speed. The camera closes the shutter by itself
 Report bugs and ask questions in the issue tracker for the
 [iOS app](https://github.com/mhellevang/openrz67-ios/issues), the
 [Android app](https://github.com/mhellevang/openrz67-android/issues) or the
-[trigger](https://github.com/mhellevang/openrz67-trigger/issues).
+[trigger](https://github.com/mhellevang/openrz67/issues).

@@ -1,4 +1,4 @@
-# openrz67-trigger
+# openrz67
 
 ## PCB
 

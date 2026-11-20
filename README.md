@@ -1,4 +1,4 @@
-# openrz67-trigger
+# openrz67
 
 A Bluetooth remote release for the Mamiya RZ67. A small box on a coin cell plugs into the
 camera's remote port. An Android or iPhone app fires the shutter, holds it open for bulb, or
@@ -61,7 +61,7 @@ after about 60 seconds.
 ## What's in here
 
 ```
-openrz67-trigger/
+openrz67/
 ├── kicad/        # the board, generated from tools/design.py; fab files in out/
 ├── case/         # 3D-printed case (build123d), shell + sliding floor + light pipe; STLs in stl/
 ├── firmware/     # Zephyr application for the nRF54L15
@@ -76,7 +76,7 @@ openrz67-trigger/
 ```
 
 Earlier ESP32-C3 versions are at tag
-[`esp32-final`](https://github.com/mhellevang/openrz67-trigger/tree/esp32-final/esp32).
+[`esp32-final`](https://github.com/mhellevang/openrz67/tree/esp32-final/esp32).
 
 ## License
 
@@ -88,7 +88,7 @@ Copyright © 2023 Mathias Hellevang.
 
 You may build, change and sell this. If you pass it on, built or as files, tell the receiver
 where the source is. If you changed it, publish your changed files under the same licence.
-Source: <https://github.com/mhellevang/openrz67-trigger>.
+Source: <https://github.com/mhellevang/openrz67>.
 
 The footprints, symbols and 3D models in `kicad/openrz67-nrf.pretty/`,
 `openrz67-nrf.kicad_sym` and `openrz67-nrf.3dshapes/` are **not** covered, because they are

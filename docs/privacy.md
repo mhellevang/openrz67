@@ -30,7 +30,7 @@ Since no data is collected, the apps collect none from children either.
 ## Changes
 
 If this ever changes, this page is updated before a new version of an app ships. Its history
-is public in [this repository](https://github.com/mhellevang/openrz67-trigger/commits/main/docs/privacy.md).
+is public in [this repository](https://github.com/mhellevang/openrz67/commits/main/docs/privacy.md).
 
 ## Contact
 

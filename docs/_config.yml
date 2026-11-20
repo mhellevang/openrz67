@@ -1,0 +1,4 @@
+title: openrz67
+description: A Bluetooth remote release for the Mamiya RZ67
+exclude:
+  - render
