@@ -5,7 +5,7 @@ Run with KiCad's bundled python from kicad/:
   $KICAD_PY tools/gen_pcb.py [--dump]
 --dump prints every pad position after placement (used while routing).
 """
-import os, sys
+import os, subprocess, sys
 import math
 import pcbnew
 
@@ -157,6 +157,11 @@ def route(b, nets):
 
 
 def main():
+    if "--fill" in sys.argv:
+        b = pcbnew.LoadBoard(PCB)
+        pcbnew.ZONE_FILLER(b).Fill(b.Zones())
+        b.Save(PCB)
+        return
     b = pcbnew.CreateEmptyBoard()
     b.SetCopperLayerCount(2)
     tb = b.GetTitleBlock(); tb.SetTitle("OpenRZ67 trigger, nRF54L15 / coin cell"); tb.SetRevision(D.REV)
@@ -164,9 +169,9 @@ def main():
     nets, fps = place(b)
     zones(b, nets); route(b, nets); silk(b)
     b.Save(PCB)
-    b = pcbnew.LoadBoard(PCB)          # refill with the saved rules compiled
-    pcbnew.ZONE_FILLER(b).Fill(b.Zones())
-    b.Save(PCB)
+    # Refill with the saved rules compiled. In a new process: a reload in this one comes
+    # back with KiCad's default rules (10.0.8), and the pour ends up 0.5 mm from the edge.
+    subprocess.run([sys.executable, __file__, "--fill"], check=True)
     if "--dump" in sys.argv:
         for f in sorted(b.GetFootprints(), key=lambda f: f.GetReference()):
             for p in f.Pads():
