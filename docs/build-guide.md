@@ -6,7 +6,7 @@ Nothing is soldered by hand. The board comes assembled, everything else plugs in
 
 | What | Where | Note |
 |---|---|---|
-| Assembled board | JLCPCB | see step 1 |
+| Assembled board | a PCB assembly service, tested with JLCPCB | see step 1 |
 | CR2032 | anywhere | one per board |
 | SH1.0 4P to Dupont female cable (Qwiic / STEMMA QT pigtail) | AliExpress | three: one camera cable (`J1`), one for flashing (`J2`), one spare |
 | Raspberry Pi Pico 2 WH | any Pi reseller | the flashing probe. H = headers pre-soldered, W is irrelevant here. A Pico H works the same |
@@ -25,8 +25,11 @@ both sides:
 - `openrz67-nrf-bom.csv`
 - `openrz67-nrf-pos.csv`
 
+Other assembly services should take the same files: the Gerber zip is standard, the BOM has
+manufacturer and MPN for every part, and the position file is plain CSV. Only JLCPCB is tested.
+
 The round pad in the middle of the back is the cell's minus contact, part of `BT1`. The paste
-layer gives it a Ø7 mm opening. If JLCPCB asks about it, keep the paste.
+layer gives it a Ø7 mm opening. If the assembler asks about it, keep the paste.
 
 The schematic is [`openrz67-nrf-schematic.pdf`](https://github.com/mhellevang/openrz67/blob/main/kicad/out/openrz67-nrf-schematic.pdf).
 

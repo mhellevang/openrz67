@@ -11,7 +11,7 @@
 
 - Instant release, bulb, and a countdown of up to 4 minutes.
 - Runs on a CR2032. It sleeps between uses and wakes on a button press.
-- Nothing to solder. The board comes assembled from JLCPCB, everything else plugs in.
+- Nothing to solder. The board comes assembled from a PCB assembly service, everything else plugs in.
 - Firmware updates over Bluetooth.
 
 <div class="shots">

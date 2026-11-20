@@ -20,7 +20,7 @@ runs a countdown.
 
 - Instant release, bulb, and a countdown of up to 4 minutes.
 - Runs on a CR2032. It sleeps between uses and wakes on a button press.
-- Nothing to solder. The board comes assembled from JLCPCB, everything else plugs in.
+- Nothing to solder. The board comes assembled from a PCB assembly service, everything else plugs in.
 - Firmware updates over Bluetooth.
 
 ## Build one
@@ -32,7 +32,7 @@ flashing, the camera cable.
 
 In short:
 
-1. Order the assembled board from JLCPCB with the files in [`kicad/out/`](kicad/out/).
+1. Order the assembled board (tested with JLCPCB) with the files in [`kicad/out/`](kicad/out/).
 2. Print the case from [`case/`](case/).
 3. Build the firmware with the nRF Connect SDK and flash it once with a Raspberry Pi Pico.
    After that, updates go over Bluetooth.
