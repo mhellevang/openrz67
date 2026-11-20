@@ -25,9 +25,8 @@ both sides:
 - `openrz67-nrf-bom.csv`
 - `openrz67-nrf-pos.csv`
 
-The round pad in the middle of the back is the cell's minus contact. It has no part on it, but
-it needs its solder paste. In the order remark, ask JLCPCB to print paste on that pad as the
-paste layer shows.
+The round pad in the middle of the back is the cell's minus contact, part of `BT1`. The paste
+layer gives it a Ø7 mm opening. If JLCPCB asks about it, keep the paste.
 
 The schematic is [`openrz67-nrf-schematic.pdf`](https://github.com/mhellevang/openrz67/blob/main/kicad/out/openrz67-nrf-schematic.pdf).
 
