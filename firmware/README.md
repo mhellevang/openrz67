@@ -9,6 +9,7 @@ SDK v3.4.1 (MCUboot 39 kB, app 147 kB flash, 45 kB RAM); runs on the Rev A board
 |---|---|
 | `src/main.c` | the application: GATT, advertising, shutter, countdown, LED, battery, sleep |
 | `prj.conf` | Kconfig: Bluetooth peripheral, BAS, DIS, SMP (updates), ADC, GPIO, HFINT calibration, no serial |
+| `VERSION` | the firmware version: shown as the firmware revision in Device Information, and the MCUboot image version |
 | `sysbuild.conf`, `sysbuild/mcuboot.conf` | MCUboot as the bootloader, fed watchdog during a swap |
 | `debug.conf` | add-on: logging over Segger RTT |
 | `dfu.py` | update over Bluetooth from a computer |
