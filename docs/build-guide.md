@@ -16,9 +16,9 @@ Nothing is soldered by hand. The board comes assembled, everything else plugs in
 ## 1. Order the board
 
 These files are rev B, a small update to a board that is in use. It has not been built yet.
-Rev A and what changed are in [`kicad/archive/`](../kicad/archive/).
+Rev A and what changed are in [`kicad/archive/`](https://github.com/mhellevang/openrz67/tree/main/kicad/archive).
 
-Upload these three files from [`kicad/out/`](../kicad/out/) to JLCPCB and pick assembly on
+Upload these three files from [`kicad/out/`](https://github.com/mhellevang/openrz67/tree/main/kicad/out) to JLCPCB and pick assembly on
 both sides:
 
 - `openrz67-nrf-gerber.zip`
@@ -29,11 +29,11 @@ The round pad in the middle of the back is the cell's minus contact. It has no p
 it needs its solder paste. In the order remark, ask JLCPCB to print paste on that pad as the
 paste layer shows.
 
-The schematic is [`openrz67-nrf-schematic.pdf`](../kicad/out/openrz67-nrf-schematic.pdf).
+The schematic is [`openrz67-nrf-schematic.pdf`](https://github.com/mhellevang/openrz67/blob/main/kicad/out/openrz67-nrf-schematic.pdf).
 
 ## 2. Print the case
 
-The files are in [`case/stl/`](../case/stl/):
+The files are in [`case/stl/`](https://github.com/mhellevang/openrz67/tree/main/case/stl):
 
 | File | What | How it prints |
 |---|---|---|
@@ -43,13 +43,13 @@ The files are in [`case/stl/`](../case/stl/):
 | `openrz67-nrf-lightpipe.stl` | the light pipe | head-down, clear filament |
 
 No supports. The fits are tuned in ABS, but PLA or PETG should work too. Glue the light pipe
-into the shell. Details, and how to change the case, in [`case/README.md`](../case/README.md).
+into the shell. Details, and how to change the case, in [`case/README.md`](https://github.com/mhellevang/openrz67/blob/main/case/README.md).
 
 ## 3. Flash the firmware
 
 Build it with the nRF Connect SDK, then flash it once over `J2` with the Pico as a probe.
 The cell must be out while the probe is connected. After that, updates go over Bluetooth.
-Step by step, with wiring: [`firmware/README.md`](../firmware/README.md).
+Step by step, with wiring: [`firmware/README.md`](https://github.com/mhellevang/openrz67/blob/main/firmware/README.md).
 
 ## 4. Make the camera cable
 
@@ -67,7 +67,7 @@ Wire colours vary between cables. Go by position: pin 1 is next to the white dot
 connector. On the camera, seen from the front, pin 1 is the leftmost, under the small triangle.
 Check the orientation before you plug it into the camera.
 
-Rev A boards have a different `J1` order, see [`kicad/archive/`](../kicad/archive/).
+Rev A boards have a different `J1` order, see [`kicad/archive/`](https://github.com/mhellevang/openrz67/tree/main/kicad/archive).
 
 ## 5. Put it together
 
@@ -77,7 +77,7 @@ Flux left on it can keep the cell from making contact.
 Slide the CR2032 into the clip, **+ side toward the floor** (there is a + on the floor).
 Place the board in the shell with the switch under the button tab and J1 facing the cable opening.
 Slide the floor in until it clicks. To change the cell later, see
-[`case/README.md`](../case/README.md).
+[`case/README.md`](https://github.com/mhellevang/openrz67/blob/main/case/README.md).
 
 ## 6. Install the app
 

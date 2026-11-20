@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+{% seo %}
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%231b1b1b'/><circle cx='16' cy='16' r='7' fill='%23c8402d'/></svg>">
+<style>
+:root{--bg:#f4efe6;--bg2:#eae3d6;--ink:#1b1b1b;--mute:#5f5a52;--line:#d6cdbd;--acc:#c8402d;--acc2:#a3321f;--r:10px;--s:clamp(1rem,3vw,2rem);--sh:0 1px 2px #0002,0 8px 24px #0000000d;font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);line-height:1.6;font-size:clamp(1rem,.95rem + .3vw,1.125rem)}
+a{color:inherit;text-decoration-color:var(--acc);text-decoration-thickness:1.5px;text-underline-offset:3px}
+a:hover{color:var(--acc2)}
+:focus-visible{outline:3px solid var(--acc);outline-offset:3px;border-radius:3px}
+img{max-width:100%;height:auto}
+.wrap{width:min(46rem,100% - 2*var(--s));margin-inline:auto}
+.home .wrap,.home main{width:min(68rem,100% - 2*var(--s))}
+
+header{position:sticky;top:0;z-index:9;background:#f4efe6e6;backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav{display:flex;align-items:center;gap:clamp(.9rem,3vw,1.5rem);height:3.75rem}
+.logo{font-weight:700;font-size:1.25rem;text-decoration:none;display:flex;align-items:center;gap:.5rem;margin-right:auto}
+.logo i{width:.75em;height:.75em;border-radius:50%;background:radial-gradient(circle,var(--acc) 42%,var(--ink) 46%)}
+nav a:not(.logo){text-decoration:none;color:var(--mute);font-size:.95rem}
+nav a:not(.logo):hover{color:var(--ink)}
+
+main{margin-inline:auto;padding-block:clamp(2rem,6vw,4rem)}
+h1,h2,h3{line-height:1.15;letter-spacing:-.01em;font-weight:600}
+h1{font-size:clamp(2rem,1.5rem + 2.5vw,3rem);margin:0 0 1rem}
+h2{font-size:clamp(1.5rem,1.3rem + 1vw,2rem);margin:3rem 0 .75rem;padding-top:2rem;border-top:1px solid var(--line)}
+h3{font-size:1.2rem;margin:2rem 0 .5rem}
+code{font:.85em/1.5 ui-monospace,"SF Mono",Menlo,monospace;background:var(--bg2);padding:.1em .35em;border-radius:4px}
+pre{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r);padding:1rem;overflow-x:auto}
+pre code{background:none;padding:0}
+.highlight{background:none}
+table{border-collapse:collapse;width:100%;font-size:.95em;margin:1rem 0;display:block;overflow-x:auto}
+th,td{text-align:left;padding:.5rem .75rem;border-bottom:1px solid var(--line);vertical-align:top}
+th{font:600 .75rem/1.2 ui-monospace,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
+blockquote{margin:1.25rem 0;border-left:3px solid var(--acc);padding:.5rem 1rem;background:#fff6}
+li+li{margin-top:.3rem}
+
+.hero{display:grid;gap:clamp(2rem,5vw,4rem);align-items:center;padding-bottom:1rem}
+@media(min-width:840px){.hero{grid-template-columns:1.1fr 1fr}}
+.hero h1{font-size:clamp(2.4rem,1.6rem + 4vw,4.25rem)}
+.hero em{color:var(--acc)}
+.hero img{border-radius:var(--r);box-shadow:var(--sh);display:block}
+.lead{color:var(--mute);font-size:1.15em;max-width:36rem}
+.cta{display:flex;flex-wrap:wrap;gap:.75rem;margin-top:2rem}
+.btn{display:inline-block;padding:.8rem 1.4rem;border-radius:var(--r);text-decoration:none;font-weight:600;border:1.5px solid var(--ink)}
+.btn.p{background:var(--ink);color:var(--bg)}
+.btn.p:hover{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn:not(.p):hover{background:var(--ink);color:var(--bg)}
+.shots{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(.5rem,2vw,1.25rem);max-width:40rem}
+.shots img{border-radius:clamp(8px,2vw,18px);box-shadow:var(--sh);display:block}
+.cards{display:grid;gap:1.25rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr))}
+.card{background:#fff9;border:1px solid var(--line);border-radius:var(--r);padding:1.25rem 1.5rem}
+.card h3{margin:0 0 .5rem}
+.card p{margin:0 0 .75rem;color:var(--mute);font-size:.95em}
+
+footer{border-top:1px solid var(--line);padding-block:2rem;color:var(--mute);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+footer a{text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body{% if page.url == "/" %} class="home"{% endif %}>
+<header><nav class="wrap" aria-label="Main">
+<a class="logo" href="{{ '/' | relative_url }}"><i aria-hidden="true"></i>openrz67</a>
+<a href="{{ '/build-guide.html' | relative_url }}">Build guide</a>
+<a href="{{ '/support.html' | relative_url }}">Support</a>
+<a href="https://github.com/mhellevang/openrz67">GitHub</a>
+</nav></header>
+<main class="wrap">
+{{ content }}
+</main>
+<footer><div class="wrap">
+<span>openrz67 · open source · not affiliated with Mamiya</span>
+<span><a href="{{ '/support.html' | relative_url }}">Support</a> · <a href="{{ '/privacy.html' | relative_url }}">Privacy</a> · <a href="https://github.com/mhellevang/openrz67/tree/main/docs">Edit on GitHub</a></span>
+</div></footer>
+</body>
+</html>
