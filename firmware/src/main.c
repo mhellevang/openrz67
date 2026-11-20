@@ -10,7 +10,8 @@
  *   plus Device Information (0x180A) and Battery Service (0x180F).
  *
  * Power: boot (button press) -> advertise ADV_TIMEOUT -> no connection: System OFF, the
- * button wakes it. Connected: no timeout. Disconnect -> advertise ADV_TIMEOUT again.
+ * button wakes it. Connected: IDLE_TIMEOUT without a command (and no bulb or countdown
+ * running) -> System OFF. Disconnect -> advertise ADV_TIMEOUT again.
  */
 #include <zephyr/kernel.h>
 #include <zephyr/sys/poweroff.h>
@@ -34,6 +35,7 @@
 LOG_MODULE_REGISTER(openrz67, LOG_LEVEL_INF);
 
 #define ADV_TIMEOUT      K_MINUTES(3)
+#define IDLE_TIMEOUT     K_MINUTES(30)
 #define VBAT_PERIOD      K_SECONDS(60)
 #define VBAT_SAMPLES     5
 #define VBAT_SAMPLE_GAP_MS 6
@@ -181,6 +183,33 @@ static void power_off(void)
 	sys_poweroff();
 }
 
+static void shutdown(void)
+{
+	if (current_conn) {
+		bt_conn_disconnect(current_conn, BT_HCI_ERR_REMOTE_POWER_OFF);
+		k_msleep(100);   /* let the disconnect go out so the app sees it at once */
+	}
+	power_off();
+}
+
+/* Straight to System OFF rather than a disconnect: the apps reconnect on their own, so the
+ * link would only come back */
+static void idle_timeout_fn(struct k_work *work);
+static K_WORK_DELAYABLE_DEFINE(idle_timeout, idle_timeout_fn);
+
+static void idle_timeout_fn(struct k_work *work)
+{
+	if (current_conn == NULL) {
+		return;
+	}
+	if (bulb_active || atomic_get(&countdown_active) || k_msgq_num_used_get(&commands)) {
+		k_work_reschedule(&idle_timeout, IDLE_TIMEOUT);
+		return;
+	}
+	LOG_INF("idle, sleeping");
+	shutdown();
+}
+
 static void adv_timeout_fn(struct k_work *work)
 {
 	if (current_conn) {
@@ -202,6 +231,7 @@ static void connected(struct bt_conn *conn, uint8_t err)
 	}
 	current_conn = bt_conn_ref(conn);
 	k_work_cancel_delayable(&adv_timeout);
+	k_work_reschedule(&idle_timeout, IDLE_TIMEOUT);
 	/* 30-50 ms interval, no latency: a shutter command is acted on within one interval */
 	bt_conn_le_param_update(conn, BT_LE_CONN_PARAM(0x18, 0x28, 0, 400));
 }
@@ -398,11 +428,7 @@ static void long_press_fn(struct k_work *work)
 		k_msleep(20);
 		released = gpio_pin_get_dt(&button) ? 0 : released + 1;
 	}
-	if (current_conn) {
-		bt_conn_disconnect(current_conn, BT_HCI_ERR_REMOTE_POWER_OFF);
-		k_msleep(100);   /* let the disconnect go out so the app sees it at once */
-	}
-	power_off();
+	shutdown();
 }
 static K_WORK_DELAYABLE_DEFINE(long_press, long_press_fn);
 
@@ -473,6 +499,7 @@ int main(void)
 	while (1) {
 		if (k_msgq_get(&commands, &c, next_wait(k_uptime_get())) == 0) {
 			handle(&c);
+			k_work_reschedule(&idle_timeout, IDLE_TIMEOUT);
 		}
 		int64_t now = k_uptime_get();
 		if (atomic_get(&countdown_active) && now >= countdown_end) {

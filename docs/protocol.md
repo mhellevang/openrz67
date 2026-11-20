@@ -61,6 +61,9 @@ a bulb exposure.
 When the connection drops, a bulb exposure ends and a running countdown still fires. The
 device then advertises for 3 minutes and sleeps if nothing connects.
 
+After 30 minutes connected without a command, and no bulb exposure or countdown running, the
+device disconnects and sleeps at once. A button press wakes it.
+
 Commands are queued in
 the BLE callback and executed outside it. One queue slot is reserved for bulb stop. When the
 queue is full, another bulb stop is covered by the queued stop. Other commands are dropped
