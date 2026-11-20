@@ -35,9 +35,10 @@ SDK v3.4.1 (MCUboot 39 kB, app 147 kB flash, 45 kB RAM); runs on the Rev A board
 - LED: solid for 2 s after a trigger, a short blink every second while a bulb exposure is
   held, fast blink in a countdown, a short blink every 2 s while advertising, off when connected and idle.
 - Battery: VDD measured on the internal ADC channel every 60 s; mV on the custom
-  characteristic (uint16 LE, notify), percent on the Battery Service, linear 2.5 to 3.0 V. A board that measures through a divider
-  (the Feather) gives the ratio and range in `zephyr,user`, and an enable pin if the divider
-  is switched; then it is on only for the reading.
+  characteristic (uint16 LE, notify), percent on the Battery Service from a CR2032 discharge curve (3.0 V 100 %, 2.9 V 42 %,
+  2.74 V 18 %, 2.44 V 6 %, 2.1 V 0 %). A board that measures through a divider (the Feather)
+  gives the ratio and its own curve (`vbat-curve`, mV/percent pairs) in `zephyr,user`, and an
+  enable pin if the divider is switched; then it is on only for the reading.
 
 ## Pins
 

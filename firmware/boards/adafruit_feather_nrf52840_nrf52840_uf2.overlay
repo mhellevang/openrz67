@@ -21,8 +21,7 @@
 	zephyr,user {
 		io-channels = <&adc 5>;
 		vbat-divider = <2>;
-		vbat-empty-mv = <3300>;
-		vbat-full-mv = <4150>;
+		vbat-curve = <4150 100 3300 0>;
 	};
 };
 

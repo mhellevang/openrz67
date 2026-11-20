@@ -34,7 +34,8 @@ and:
 * characteristic `cda71ce6-4af9-4aa2-8d34-329c2acdae09` (read + notify): battery voltage in
   millivolts, little-endian `uint16`.
 * Battery Service (`0x180F`, Battery Level `0x2A19`): the same reading as a percentage, which
-  is what phones show without any app, linear from 2.5 V (0 %) to 3.0 V (100 %).
+  is what phones show without any app, from a CR2032 discharge curve: 3.0 V is 100 %,
+  2.9 V 42 %, 2.74 V 18 %, 2.44 V 6 %, 2.1 V 0 %, linear in between.
 
 **Single-byte commands** (value = button × 10 + state):
 

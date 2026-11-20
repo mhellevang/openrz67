@@ -35,9 +35,7 @@ LOG_MODULE_REGISTER(openrz67, LOG_LEVEL_INF);
 
 #define ADV_TIMEOUT      K_MINUTES(3)
 #define VBAT_PERIOD      K_SECONDS(60)
-/* Defaults are the CR2032 board's; a board with a divider or a LiPo sets them in zephyr,user */
-#define VBAT_EMPTY_MV    DT_PROP_OR(DT_PATH(zephyr_user), vbat_empty_mv, 2500)
-#define VBAT_FULL_MV     DT_PROP_OR(DT_PATH(zephyr_user), vbat_full_mv, 3000)
+/* Default is the CR2032 board's; a board with a divider sets it in zephyr,user */
 #define VBAT_DIVIDER     DT_PROP_OR(DT_PATH(zephyr_user), vbat_divider, 1)
 #define TRIGGER_HOLD_MS  100    /* S2 held for a plain release */
 #define S1_LEAD_MS       10     /* S1 before S2, lets the camera wake its meter */
@@ -234,6 +232,30 @@ BT_CONN_CB_DEFINE(conn_cb) = {
 static void vbat_update(struct k_work *work);
 static K_WORK_DELAYABLE_DEFINE(vbat_work, vbat_update);
 
+/* mV, percent pairs, falling, interpolated between. The default is the CR2032 curve from the
+ * nRF5 SDK's battery_level_in_percent(); a CR2032 sits near 2.9 V most of its life */
+#if DT_NODE_HAS_PROP(DT_PATH(zephyr_user), vbat_curve)
+static const uint16_t vbat_curve[] = DT_PROP(DT_PATH(zephyr_user), vbat_curve);
+#else
+static const uint16_t vbat_curve[] = {3000, 100, 2900, 42, 2740, 18, 2440, 6, 2100, 0};
+#endif
+
+static int vbat_percent(int mv)
+{
+	if (mv >= vbat_curve[0]) {
+		return vbat_curve[1];
+	}
+	for (size_t i = 2; i < ARRAY_SIZE(vbat_curve); i += 2) {
+		int v0 = vbat_curve[i - 2], p0 = vbat_curve[i - 1];
+		int v1 = vbat_curve[i], p1 = vbat_curve[i + 1];
+
+		if (mv >= v1) {
+			return p1 + (mv - v1) * (p0 - p1) / (v0 - v1);
+		}
+	}
+	return vbat_curve[ARRAY_SIZE(vbat_curve) - 1];
+}
+
 static void vbat_update(struct k_work *work)
 {
 	int16_t raw;
@@ -252,8 +274,7 @@ static void vbat_update(struct k_work *work)
 		int32_t mv = raw;
 		adc_raw_to_millivolts_dt(&vdd_adc, &mv);
 		vbat_mv = CLAMP(mv * VBAT_DIVIDER, 0, 0xffff);
-		int pct = (int)(vbat_mv - VBAT_EMPTY_MV) * 100 / (VBAT_FULL_MV - VBAT_EMPTY_MV);
-		bt_bas_set_battery_level(CLAMP(pct, 0, 100));
+		bt_bas_set_battery_level(vbat_percent(vbat_mv));
 		if (vbat_notify && current_conn) {
 			uint16_t v = sys_cpu_to_le16(vbat_mv);
 			bt_gatt_notify(current_conn, &trigger_svc.attrs[4], &v, sizeof(v));
