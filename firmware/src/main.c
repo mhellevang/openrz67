@@ -35,6 +35,8 @@ LOG_MODULE_REGISTER(openrz67, LOG_LEVEL_INF);
 
 #define ADV_TIMEOUT      K_MINUTES(3)
 #define VBAT_PERIOD      K_SECONDS(60)
+#define VBAT_SAMPLES     5
+#define VBAT_SAMPLE_GAP_MS 6
 /* Default is the CR2032 board's; a board with a divider sets it in zephyr,user */
 #define VBAT_DIVIDER     DT_PROP_OR(DT_PATH(zephyr_user), vbat_divider, 1)
 #define TRIGGER_HOLD_MS  100    /* S2 held for a plain release */
@@ -258,20 +260,30 @@ static int vbat_percent(int mv)
 
 static void vbat_update(struct k_work *work)
 {
-	int16_t raw;
+	int16_t raw, best = INT16_MIN;
 	struct adc_sequence seq = {.buffer = &raw, .buffer_size = sizeof(raw)};
+	int err = 0;
 
 	adc_sequence_init_dt(&vdd_adc, &seq);
+	seq.calibrate = true;
 	if (vbat_en.port) {
 		gpio_pin_set_dt(&vbat_en, 1);
 		k_msleep(2);
 	}
-	int err = adc_read_dt(&vdd_adc, &seq);
+	/* a radio event only pulls the cell down, so the highest sample is nearest its rest voltage */
+	for (int i = 0; i < VBAT_SAMPLES && err == 0; i++) {
+		if (i > 0) {
+			k_msleep(VBAT_SAMPLE_GAP_MS);
+		}
+		err = adc_read_dt(&vdd_adc, &seq);
+		seq.calibrate = false;
+		best = MAX(best, raw);
+	}
 	if (vbat_en.port) {
 		gpio_pin_set_dt(&vbat_en, 0);
 	}
 	if (err == 0) {
-		int32_t mv = raw;
+		int32_t mv = best;
 		adc_raw_to_millivolts_dt(&vdd_adc, &mv);
 		vbat_mv = CLAMP(mv * VBAT_DIVIDER, 0, 0xffff);
 		bt_bas_set_battery_level(vbat_percent(vbat_mv));
